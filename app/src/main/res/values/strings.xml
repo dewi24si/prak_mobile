@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name">Don Apps</string>
+    <string name="judul">Halaman Kirim</string>
+    <string name="berhasil">    Kode berhasil dikirim!
+        Silahkan periksa nomor Anda</string>
 </resources>
