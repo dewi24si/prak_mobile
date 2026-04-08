@@ -1,39 +1,46 @@
-package com.example.donapps
+package com.example.donapps.pertemuan_4
 
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.example.donapps.R
 import com.example.donapps.databinding.ActivityFourthBinding
-import com.example.donapps.databinding.ActivityMainBinding
 import com.example.donapps.databinding.ActivityThirdBinding
-import com.example.donapps.pertemuan_3.ThirdResultActivity
-import com.example.donapps.pertemuan_4.FourthActivity
 
-class MainActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityMainBinding
+class FourthActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityFourthBinding
     override fun onCreate(savedInstanceState: Bundle?) {
+
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        binding = ActivityMainBinding.inflate(layoutInflater)
+        binding = ActivityFourthBinding.inflate(layoutInflater)
         setContentView(binding.root)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-        binding.btnToFourth.setOnClickListener {
-            //Mengambil value dari inputNama dan menampilkan di Logcat
 
-            val intent = Intent(this, FourthActivity::class.java)
-            intent.putExtra("name", "Politeknik Caltex Riau")
-            intent.putExtra("from", "Rumbai")
-            intent.putExtra("age", 25)
-            startActivity(intent)
+        val name = intent.getStringExtra("name")
+        val from = intent.getStringExtra("from")
+        val age = intent.getIntExtra("age",0)
+        Log.e("Data Intent","Nama: $name , Usia: $age, Asal: $from")
+
+        binding.bntBack.setOnClickListener {
+            finish()
         }
+
+    }
+    override fun onStart() {
+        super.onStart()
+        Log.e("onStart", "onStart: {nama_activity} terlihat di layar")
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Log.e("onDestroy", "{nama_activity} dihapus dari stack")
     }
 }
