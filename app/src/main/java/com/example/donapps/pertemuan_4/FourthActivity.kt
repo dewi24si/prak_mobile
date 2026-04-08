@@ -9,6 +9,8 @@ import androidx.core.view.WindowInsetsCompat
 import com.example.donapps.R
 import com.example.donapps.databinding.ActivityFourthBinding
 import com.example.donapps.databinding.ActivityThirdBinding
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.google.android.material.snackbar.Snackbar
 
 class FourthActivity : AppCompatActivity() {
     private lateinit var binding: ActivityFourthBinding
@@ -31,6 +33,27 @@ class FourthActivity : AppCompatActivity() {
 
         binding.bntBack.setOnClickListener {
             finish()
+        }
+        binding.btnShowSnackbar.setOnClickListener {
+            Snackbar.make(binding.root, "Ini adalah Snackbar", Snackbar.LENGTH_SHORT)
+                .setAction("Tutup"){
+                    Log.e("Info Snackbar","Snackbar ditutup")
+                }
+                .show()
+        }
+        binding.btnShowAlertDialog.setOnClickListener {
+            MaterialAlertDialogBuilder(this)
+                .setTitle("Konfirmasi")
+                .setMessage("Apakah Anda yakin ingin melanjutkan?")
+                .setPositiveButton("Ya") { dialog, _ ->
+                    dialog.dismiss()
+                    Log.e("Info Dialog","Anda memilih Ya!")
+                }
+                .setNegativeButton("Batal") { dialog, _ ->
+                    dialog.dismiss()
+                    Log.e("Info Dialog","Anda memilih Tidak!")
+                }
+                .show()
         }
 
     }
