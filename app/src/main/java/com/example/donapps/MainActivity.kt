@@ -14,6 +14,7 @@ import com.example.donapps.pertemuan_4.FourthActivity
 import com.example.donapps.pertemuan_5.FifthActivity
 import androidx.core.content.edit
 import com.example.donapps.AuthActivity
+import com.example.donapps.pertemuan_7.SeventhActivity
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class MainActivity : AppCompatActivity() {
@@ -41,6 +42,11 @@ class MainActivity : AppCompatActivity() {
 
         binding.btnToFifth.setOnClickListener {
             val intent = Intent(this, FifthActivity::class.java)
+            startActivity(intent)
+        }
+
+        binding.btnToSeventh.setOnClickListener {
+            val intent = Intent(this, SeventhActivity::class.java)
             startActivity(intent)
         }
 

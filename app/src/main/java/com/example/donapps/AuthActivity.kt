@@ -31,9 +31,8 @@ class AuthActivity : AppCompatActivity() {
             if (username == password) {
                 val editor = sharedPref.edit()
                 editor.putBoolean("isLogin", true)
-                editor.putString("username",username)
+                editor.putString("username", username)
                 editor.apply()
-
                 val intent = Intent(this, MainActivity::class.java)
                 startActivity(intent)
                 finish()
