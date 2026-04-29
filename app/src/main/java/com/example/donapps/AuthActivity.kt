@@ -4,7 +4,6 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import com.example.donapps.com.example.donapps.MainActivity
 import com.example.donapps.databinding.ActivityAuthBinding
 
 class AuthActivity : AppCompatActivity() {
@@ -14,16 +13,9 @@ class AuthActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityAuthBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        //Kode ini harus selalu dipanggil saat butuh akses "user_pref"
+
         val sharedPref = getSharedPreferences("user_pref", MODE_PRIVATE)
 
-//        //Kondisi jika isLogin bernilai true
-//        val isLogin = sharedPref.getBoolean("isLogin", false)
-//        if (isLogin) {
-//            val intent = Intent(this, MainActivity::class.java)
-//            startActivity(intent)
-//            finish()
-//        }
         binding.btnLogin.setOnClickListener {
             val username = binding.etUsername.text.toString()
             val password = binding.etPassword.text.toString()
@@ -33,7 +25,7 @@ class AuthActivity : AppCompatActivity() {
                 editor.putBoolean("isLogin", true)
                 editor.putString("username", username)
                 editor.apply()
-                val intent = Intent(this, MainActivity::class.java)
+                val intent = Intent(this, BaseActivity::class.java)
                 startActivity(intent)
                 finish()
             } else {

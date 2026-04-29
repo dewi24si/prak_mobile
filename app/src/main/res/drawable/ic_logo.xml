@@ -1,0 +1,18 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="120dp"
+    android:height="120dp"
+    android:viewportWidth="120"
+    android:viewportHeight="120">
+
+    <!-- Lingkaran background -->
+    <path
+        android:fillColor="#6C63FF"
+        android:pathData="M60,60m-60,0a60,60 0,1 1,120 0a60,60 0,1 1,-120 0" />
+
+    <!-- Huruf D besar -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M38,30 L38,90 L60,90 C78,90 88,78 88,60 C88,42 78,30 60,30 Z
+                          M50,42 L60,42 C70,42 76,50 76,60 C76,70 70,78 60,78 L50,78 Z" />
+
+</vector>

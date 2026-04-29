@@ -1,8 +1,4 @@
 <resources>
     <string name="app_name">Don Apps</string>
-    <string name="judul">Halaman Kirim</string>
-    <string name="berhasil">    Kode berhasil dikirim!
-        Silahkan periksa nomor Anda</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
