@@ -6,16 +6,15 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.fragment.app.Fragment
 import com.example.donapps.R
 import com.example.donapps.databinding.ActivitySeventhBinding
-import com.example.donapps.databinding.ActivityWebViewBinding
 
 class SeventhActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivitySeventhBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
-
         super.onCreate(savedInstanceState)
         binding = ActivitySeventhBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -30,12 +29,11 @@ class SeventhActivity : AppCompatActivity() {
 
         binding.toolbar.setOnScrollChangeListener { _, _, scrollY, _, oldScrollY ->
             if (scrollY > oldScrollY) {
-                binding.appBar.setExpanded(false, true) // sembunyikan
+                binding.appBar.setExpanded(false, true)
             } else if (scrollY < oldScrollY) {
-                binding.appBar.setExpanded(true, true) // tampilkan
+                binding.appBar.setExpanded(true, true)
             }
         }
-
 
         enableEdgeToEdge()
 
@@ -45,7 +43,14 @@ class SeventhActivity : AppCompatActivity() {
             insets
         }
 
-    }
+        replaceFragment(SatuFragment())
+
+        binding.btnFragment1.setOnClickListener { replaceFragment(SatuFragment()) }
+        binding.btnFragment2.setOnClickListener { replaceFragment(DuaFragment()) }
+        binding.btnFragment3.setOnClickListener { replaceFragment(TigaFragment()) }
+
+    } // ← tutup onCreate
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             android.R.id.home -> {
@@ -54,6 +59,13 @@ class SeventhActivity : AppCompatActivity() {
             }
             else -> super.onOptionsItemSelected(item)
         }
+    }
+
+    private fun replaceFragment(fragment: Fragment) {
+        supportFragmentManager.beginTransaction()
+            .replace(binding.fragmentContainer.id, fragment)
+            .addToBackStack(null)
+            .commit()
     }
 
 }
