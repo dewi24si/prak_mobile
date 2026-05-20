@@ -17,6 +17,7 @@ import com.example.donapps.home.pertemuan_4.FourthActivity
 import com.example.donapps.home.pertemuan_5.FifthActivity
 import com.example.donapps.home.pertemuan_7.SeventhActivity
 import com.example.donapps.home.pertemuan_9.NinthActivity
+import com.example.donapps.home.pertemuan_10.TenthActivity
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 class HomeFragment : Fragment() {
@@ -35,46 +36,36 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         (requireActivity() as AppCompatActivity).setSupportActionBar(binding.toolbar)
-        (requireActivity() as AppCompatActivity).supportActionBar?.apply {
-            title = "Home"
-        }
+        (requireActivity() as AppCompatActivity).supportActionBar?.apply { title = "Home" }
 
         binding.btnToSecond.setOnClickListener {
-            val intent = Intent(requireContext(), SecondActivity::class.java)
-            intent.putExtra("judul", "Pertemuan 2")
-            intent.putExtra("description", "Deskripsi materi yang dibahas saat Pertemuan 2")
-            startActivity(intent)
+            startActivity(Intent(requireContext(), SecondActivity::class.java).apply {
+                putExtra("judul", "Pertemuan 2")
+                putExtra("description", "Deskripsi materi yang dibahas saat Pertemuan 2")
+            })
         }
-
         binding.btnToThird.setOnClickListener {
-            val intent = Intent(requireContext(), ThirdActivity::class.java)
-            startActivity(intent)
+            startActivity(Intent(requireContext(), ThirdActivity::class.java))
         }
-
         binding.btnToFourth.setOnClickListener {
-            val intent = Intent(requireContext(), FourthActivity::class.java)
-            intent.putExtra("name", "Politeknik Caltex Riau")
-            intent.putExtra("from", "Rumbai")
-            intent.putExtra("age", 25)
-            startActivity(intent)
+            startActivity(Intent(requireContext(), FourthActivity::class.java).apply {
+                putExtra("name", "Politeknik Caltex Riau")
+                putExtra("from", "Rumbai")
+                putExtra("age", 25)
+            })
         }
-
         binding.btnToFifth.setOnClickListener {
-            val intent = Intent(requireContext(), FifthActivity::class.java)
-            startActivity(intent)
+            startActivity(Intent(requireContext(), FifthActivity::class.java))
         }
-
         binding.btnToSeventh.setOnClickListener {
-            val intent = Intent(requireContext(), SeventhActivity::class.java)
-            startActivity(intent)
+            startActivity(Intent(requireContext(), SeventhActivity::class.java))
         }
-
-        // Pertemuan 9 - NinthActivity
         binding.btnToNinth.setOnClickListener {
-            val intent = Intent(requireContext(), NinthActivity::class.java)
-            startActivity(intent)
+            startActivity(Intent(requireContext(), NinthActivity::class.java))
         }
-
+        binding.btnToTenth.setOnClickListener {
+            startActivity(Intent(requireContext(), TenthActivity::class.java))
+        }
         binding.btnLogout.setOnClickListener {
             val sharedPref = requireContext().getSharedPreferences("user_pref", Context.MODE_PRIVATE)
             MaterialAlertDialogBuilder(requireContext())
@@ -83,8 +74,7 @@ class HomeFragment : Fragment() {
                 .setPositiveButton("Ya") { dialog, _ ->
                     sharedPref.edit { clear() }
                     dialog.dismiss()
-                    val intent = Intent(requireContext(), AuthActivity::class.java)
-                    startActivity(intent)
+                    startActivity(Intent(requireContext(), AuthActivity::class.java))
                     requireActivity().finish()
                 }
                 .show()
