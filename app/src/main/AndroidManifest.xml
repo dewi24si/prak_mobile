@@ -15,6 +15,9 @@
         android:theme="@style/Theme.DonApps">
 
         <activity
+            android:name=".home.pertemuan_9.NinthActivity"
+            android:exported="false" />
+        <activity
             android:name=".BaseActivity"
             android:exported="false" />
         <activity
