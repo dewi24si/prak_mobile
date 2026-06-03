@@ -6,11 +6,16 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.edit
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.donapps.AuthActivity
 import com.example.donapps.databinding.FragmentHomeBinding
+import com.example.donapps.data.api.CatFactApiClient
+import com.example.donapps.data.api.PhotoApiClient
 import com.example.donapps.home.pertemuan_2.SecondActivity
 import com.example.donapps.home.pertemuan_3.ThirdActivity
 import com.example.donapps.home.pertemuan_4.FourthActivity
@@ -18,7 +23,9 @@ import com.example.donapps.home.pertemuan_5.FifthActivity
 import com.example.donapps.home.pertemuan_7.SeventhActivity
 import com.example.donapps.home.pertemuan_9.NinthActivity
 import com.example.donapps.home.pertemuan_10.TenthActivity
+import com.example.donapps.home.photo.PhotoAdapter
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import kotlinx.coroutines.launch
 
 class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null
@@ -78,6 +85,47 @@ class HomeFragment : Fragment() {
                     requireActivity().finish()
                 }
                 .show()
+        }
+
+        loadCatFact()
+
+        binding.btnRefresh.setOnClickListener {
+            loadCatFact()
+        }
+
+        loadPhoto()
+    }
+
+    private fun loadCatFact() {
+        lifecycleScope.launch {
+            try {
+                val response = CatFactApiClient.apiService.getCatFact()
+                binding.tvCatFact.text = "\"${response.fact}\""
+            } catch (e: Exception) {
+                binding.tvCatFact.text = "Gagal mengambil fakta kucing."
+            }
+        }
+    }
+
+    private fun loadPhoto() {
+        lifecycleScope.launch {
+            try {
+                val photos = PhotoApiClient.apiService.getPhotos()
+                val adapter = PhotoAdapter(photos)
+                binding.rvGallery.adapter = adapter
+
+                /** List Tampil Vertical */
+                binding.rvGallery.layoutManager = LinearLayoutManager(requireContext())
+
+                /** List Tampil Horizontal */
+                // binding.rvGallery.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+
+                /** List Tampil Grid */
+                // binding.rvGallery.layoutManager = GridLayoutManager(requireContext(), 2)
+
+            } catch (e: Exception) {
+                Toast.makeText(requireContext(), "Gagal memuat gambar", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 
