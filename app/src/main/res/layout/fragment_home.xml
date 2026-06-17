@@ -127,6 +127,16 @@
                     android:text="Pertemuan 10"
                     app:layout_columnWeight="1" />
 
+
+                <Button
+                    android:id="@+id/btnToThirteenth"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="4dp"
+                    android:backgroundTint="#FF9800"
+                    android:text="Pertemuan 13"
+                    app:layout_columnWeight="1" />
+
                 <Button
                     android:id="@+id/btnLogout"
                     android:layout_width="0dp"

@@ -23,6 +23,7 @@ import com.example.donapps.home.pertemuan_5.FifthActivity
 import com.example.donapps.home.pertemuan_7.SeventhActivity
 import com.example.donapps.home.pertemuan_9.NinthActivity
 import com.example.donapps.home.pertemuan_10.TenthActivity
+import com.example.donapps.home.pertemuan_13.ThirteenthActivity
 import com.example.donapps.home.photo.PhotoAdapter
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.coroutines.launch
@@ -72,6 +73,9 @@ class HomeFragment : Fragment() {
         }
         binding.btnToTenth.setOnClickListener {
             startActivity(Intent(requireContext(), TenthActivity::class.java))
+        }
+        binding.btnToThirteenth.setOnClickListener {
+            startActivity(Intent(requireContext(), ThirteenthActivity::class.java))
         }
         binding.btnLogout.setOnClickListener {
             val sharedPref = requireContext().getSharedPreferences("user_pref", Context.MODE_PRIVATE)
