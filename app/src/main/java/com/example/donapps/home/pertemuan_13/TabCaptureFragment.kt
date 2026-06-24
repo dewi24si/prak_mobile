@@ -3,7 +3,6 @@ package com.example.donapps.home.pertemuan_13
 import android.app.Activity
 import android.content.ContentValues
 import android.content.Intent
-import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
@@ -12,9 +11,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.example.donapps.databinding.FragmentTabCaptureBinding
+import com.example.donapps.utils.PermissionHelper
 
 class TabCaptureFragment : Fragment() {
 
@@ -55,10 +54,17 @@ class TabCaptureFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.btnCapture.setOnClickListener {
-            if (hasCameraPermission()) {
-                openCamera()
+            if (!PermissionHelper.hasPermission(
+                    requireActivity(),
+                    android.Manifest.permission.CAMERA
+                )
+            ) {
+                PermissionHelper.requestPermission(
+                    permissionLauncher,
+                    android.Manifest.permission.CAMERA
+                )
             } else {
-                permissionLauncher.launch(android.Manifest.permission.CAMERA)
+                openCamera()
             }
         }
     }
@@ -66,13 +72,6 @@ class TabCaptureFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
-    }
-
-    private fun hasCameraPermission(): Boolean {
-        return ContextCompat.checkSelfPermission(
-            requireContext(),
-            android.Manifest.permission.CAMERA
-        ) == PackageManager.PERMISSION_GRANTED
     }
 
     private fun openCamera() {
